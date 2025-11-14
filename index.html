@@ -3,45 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
+    <title>Ocean Guard - Protecting Marine Life</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', 'Arial', sans-serif;
         }
 
         :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
+            --primary: #006994;
+            --secondary: #0891b2;
+            --accent: #38bdf8;
+            --light: #e0f2fe;
+            --dark: #083344;
+            --text: #1e293b;
             --white: #ffffff;
+            --gradient: linear-gradient(135deg, #006994 0%, #0891b2 50%, #38bdf8 100%);
         }
 
         body {
             background-color: var(--light);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
+        /* Header */
         header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            background: rgba(8, 51, 68, 0.95);
+            backdrop-filter: blur(10px);
             color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
+            padding: 1.2rem 0;
+            position: fixed;
+            width: 100%;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.8rem 0;
+            background: rgba(8, 51, 68, 0.98);
         }
 
         .container {
-            width: 90%;
-            max-width: 1200px;
+            width: 88%;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -54,318 +65,503 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
+            gap: 12px;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
 
         .logo i {
-            font-size: 2rem;
+            font-size: 2.5rem;
+            color: var(--accent);
+            animation: wave 2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
         }
 
         nav ul {
             display: flex;
             list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
+            gap: 2.5rem;
         }
 
         nav ul li a {
             color: var(--white);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 1.05rem;
             transition: all 0.3s ease;
             padding: 0.5rem 0;
             position: relative;
         }
 
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
+        nav ul li a::before {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             width: 0;
-            height: 2px;
-            background-color: var(--accent);
+            height: 3px;
+            background: var(--accent);
             transition: width 0.3s ease;
+            border-radius: 2px;
         }
 
-        nav ul li a:hover::after {
+        nav ul li a:hover::before {
             width: 100%;
         }
 
+        .mobile-menu {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+            background: linear-gradient(rgba(0, 105, 148, 0.7), rgba(8, 145, 178, 0.5)), 
+                        url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
-            height: 80vh;
+            background-attachment: fixed;
+            height: 100vh;
             display: flex;
             align-items: center;
             text-align: center;
             color: var(--white);
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, var(--light), transparent);
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--accent);
+            background: var(--gradient);
             color: var(--white);
-            padding: 0.8rem 2rem;
+            padding: 1rem 3rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 105, 148, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 105, 148, 0.6);
         }
 
+        .btn-secondary {
+            background: transparent;
+            border: 3px solid var(--white);
+            margin-left: 1rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        /* Mission Section */
         section {
-            padding: 5rem 0;
+            padding: 7rem 0;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             position: relative;
             display: inline-block;
+            font-weight: 800;
         }
 
         .section-title h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
+            width: 100px;
+            height: 5px;
+            background: var(--gradient);
+            border-radius: 3px;
         }
 
         .section-title p {
             color: var(--text);
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
+            font-size: 1.2rem;
         }
 
-        .about-content {
+        .mission-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(3, 1fr);
             gap: 3rem;
-            align-items: center;
         }
 
-        .about-img {
-            border-radius: 10px;
+        .mission-card {
+            background: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .about-img img {
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
+            height: 5px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
         }
 
-        .about-img:hover img {
-            transform: scale(1.05);
+        .mission-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(0, 105, 148, 0.2);
         }
 
-        .about-text h3 {
-            font-size: 1.8rem;
+        .mission-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mission-card i {
+            font-size: 4rem;
+            color: var(--secondary);
             margin-bottom: 1.5rem;
+            transition: all 0.4s ease;
+        }
+
+        .mission-card:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--primary);
+        }
+
+        .mission-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: var(--dark);
         }
 
-        .about-text p {
-            margin-bottom: 1.5rem;
+        .mission-card p {
+            color: var(--text);
+            line-height: 1.8;
         }
 
+        /* Stats Section */
         .stats {
+            background: var(--gradient);
+            color: var(--white);
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 3rem;
         }
 
         .stat-item {
             text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
+            padding: 2rem;
         }
 
         .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
         }
 
         .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
+            font-size: 4rem;
             margin-bottom: 0.5rem;
+            font-weight: 900;
+            counter-reset: count;
         }
 
         .stat-item p {
-            color: var(--text);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.95;
         }
 
-        .initiatives {
-            background-color: var(--white);
+        /* Projects Section */
+        .projects {
+            background: var(--white);
         }
 
-        .initiatives-grid {
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
         }
 
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
+        .project-card {
+            background: var(--light);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
         }
 
-        .initiative-card:hover {
-            transform: translateY(-10px);
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 105, 148, 0.2);
         }
 
-        .initiative-img {
-            height: 200px;
+        .project-img {
+            height: 280px;
             overflow: hidden;
+            position: relative;
         }
 
-        .initiative-img img {
+        .project-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s ease;
         }
 
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
+        .project-card:hover .project-img img {
+            transform: scale(1.15);
         }
 
-        .initiative-content {
-            padding: 1.5rem;
+        .project-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
         }
 
-        .initiative-content h3 {
-            font-size: 1.5rem;
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             color: var(--dark);
         }
 
-        .initiative-content p {
+        .project-content p {
             margin-bottom: 1.5rem;
+            color: var(--text);
         }
 
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid rgba(0, 105, 148, 0.1);
+        }
+
+        .project-meta span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: linear-gradient(135deg, var(--light) 0%, var(--white) 100%);
+        }
+
+        .testimonial-slider {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .testimonial-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 5px solid var(--accent);
+            overflow: hidden;
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .testimonial-role {
+            color: var(--secondary);
+            margin-top: 0.3rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--dark);
             color: var(--white);
             text-align: center;
-            padding: 5rem 0;
         }
 
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+        .newsletter h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
-        .cta p {
+        .newsletter p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            opacity: 0.9;
         }
 
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+            gap: 1rem;
         }
 
-        .cta .btn:hover {
-            background-color: var(--accent);
+        .newsletter-form input {
+            flex: 1;
+            padding: 1.2rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 1.2rem 3rem;
+            background: var(--accent);
+            border: none;
+            border-radius: 50px;
             color: var(--white);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
+        .newsletter-form button:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
         footer {
-            background-color: var(--dark);
+            background: #041e2a;
             color: var(--white);
-            padding: 3rem 0 1rem;
+            padding: 4rem 0 2rem;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
         }
 
         .footer-column h3 {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
+            color: var(--accent);
         }
 
         .footer-column p {
             margin-bottom: 1rem;
+            line-height: 1.8;
+            opacity: 0.9;
         }
 
         .footer-links {
@@ -373,93 +569,91 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
 
         .footer-links li a {
-            color: var(--light);
+            color: var(--white);
             text-decoration: none;
             transition: all 0.3s ease;
+            opacity: 0.9;
         }
 
         .footer-links li a:hover {
             color: var(--accent);
-            padding-left: 5px;
+            padding-left: 8px;
         }
 
         .social-links {
             display: flex;
             gap: 1rem;
+            margin-top: 1.5rem;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            background: rgba(56, 189, 248, 0.2);
             border-radius: 50%;
             color: var(--white);
             text-decoration: none;
             transition: all 0.3s ease;
+            font-size: 1.3rem;
         }
 
         .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
+            background: var(--accent);
+            transform: translateY(-5px) rotate(10deg);
         }
 
         .copyright {
             text-align: center;
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.8;
         }
 
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
+        /* Responsive */
         @media (max-width: 992px) {
-            .about-content {
+            .mission-content {
                 grid-template-columns: 1fr;
             }
             
-            .initiatives-grid {
+            .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
             }
             
             .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
             
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
             
             nav ul {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 80px;
                 left: 0;
                 width: 100%;
-                background-color: var(--primary);
+                background: var(--dark);
                 flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                padding: 2rem 0;
+                gap: 0;
             }
             
             nav ul.active {
@@ -467,15 +661,17 @@
             }
             
             nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             
             .mobile-menu {
                 display: block;
             }
             
-            .initiatives-grid {
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -483,34 +679,34 @@
                 grid-template-columns: 1fr;
             }
             
-            .stats {
-                grid-template-columns: 1fr;
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
             }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container nav-container">
             <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
+                <i class="fas fa-water"></i>
+                <span>Ocean Guard</span>
             </div>
             <nav>
                 <div class="mobile-menu">
                     <i class="fas fa-bars"></i>
                 </div>
-                <ul>
+                <ul id="nav-menu">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
+                    <li><a href="#mission">Mission</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#impact">Impact</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -520,104 +716,153 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+            <h1>Save Our <span>Oceans</span></h1>
+            <p>Join the fight to protect marine ecosystems and preserve the beauty of our blue planet for future generations.</p>
+            <div>
+                <a href="#mission" class="btn">Explore Our Mission</a>
+                <a href="#projects" class="btn btn-secondary">View Projects</a>
+            </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
+    <!-- Mission Section -->
+    <section id="mission">
         <div class="container">
             <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
+                <h2>Our Mission</h2>
+                <p>We are dedicated to protecting and restoring ocean health through innovative conservation efforts.</p>
             </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
+            <div class="mission-content">
+                <div class="mission-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Marine Protection</h3>
+                    <p>Establishing protected marine areas to safeguard critical habitats and endangered species from human impact.</p>
                 </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
+                <div class="mission-card">
+                    <i class="fas fa-recycle"></i>
+                    <h3>Plastic Reduction</h3>
+                    <p>Leading global initiatives to reduce ocean plastic pollution through cleanup campaigns and policy advocacy.</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Ocean Education</h3>
+                    <p>Empowering communities with knowledge about marine conservation and sustainable ocean practices.</p>
                 </div>
             </div>
-            <div class="stats">
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="impact">
+        <div class="container">
+            <div class="stats-grid">
                 <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
+                    <i class="fas fa-trash-alt"></i>
+                    <h3 class="counter" data-target="850000">0</h3>
+                    <p>KG Plastic Removed</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-fish"></i>
+                    <h3 class="counter" data-target="42000">0</h3>
+                    <p>Marine Animals Saved</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3 class="counter" data-target="156">0</h3>
+                    <p>Protected Areas</p>
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
+                    <h3 class="counter" data-target="95000">0</h3>
+                    <p>Active Volunteers</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
         <div class="container">
             <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+                <h2>Active Projects</h2>
+                <p>Discover our ongoing initiatives making waves in ocean conservation worldwide.</p>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Coral Restoration">
+                        <div class="project-badge">Active</div>
                     </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
+                    <div class="project-content">
+                        <h3>Coral Reef Restoration</h3>
+                        <p>Rebuilding damaged coral reefs using innovative nursery techniques and transplantation methods in the Caribbean Sea.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Caribbean</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
                     </div>
                 </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Beach Cleanup">
+                        <div class="project-badge">Ongoing</div>
                     </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
+                    <div class="project-content">
+                        <h3>Global Beach Cleanup</h3>
+                        <p>Monthly coordinated beach cleanup events across 50 countries removing plastic waste and marine debris.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-globe"></i> Worldwide</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Turtle Conservation">
+                        <div class="project-badge">Active</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Sea Turtle Protection</h3>
+                        <p>Protecting nesting sites and rehabilitating injured sea turtles along Pacific coastlines to ensure species survival.</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pacific Ocean</span>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
+    <!-- Testimonials -->
+    <section class="testimonials">
         <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+            <div class="section-title">
+                <h2>What People Say</h2>
+                <p>Hear from volunteers and partners about their experience with Ocean Guard.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-avatar">
+                        <img src="https://i.pravatar.cc/150?img=1" alt="Volunteer">
+                    </div>
+                    <p class="testimonial-text">"Being part of Ocean Guard has been life-changing. Seeing the direct impact of our cleanup efforts motivates me to do more every day."</p>
+                    <div class="testimonial-author">Sarah Martinez</div>
+                    <div class="testimonial-role">Lead Volunteer, Miami</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest ocean conservation news and opportunities.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </div>
     </section>
 
@@ -626,44 +871,44 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
+                    <h3>Ocean Guard</h3>
+                    <p>Dedicated to protecting our oceans through conservation, education, and community action. Together, we can make a difference.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h3>Quick Links</h3>
                     <ul class="footer-links">
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
+                        <li><a href="#mission">Our Mission</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#impact">Impact</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Our Programs</h3>
+                    <h3>Get Involved</h3>
                     <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
+                        <li><a href="#">Volunteer</a></li>
+                        <li><a href="#">Donate</a></li>
+                        <li><a href="#">Partner With Us</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Careers</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Ocean Avenue, San Diego, CA 92101</p>
+                    <p><i class="fas fa-phone"></i> +1 (619) 555-0123</p>
+                    <p><i class="fas fa-envelope"></i> info@oceanguard.org</p>
                 </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
+                <p>&copy; 2025 Ocean Guard. All rights reserved. | Protecting our oceans, one wave at a time.</p>
             </div>
         </div>
     </footer>
@@ -671,52 +916,42 @@
     <script>
         // Mobile Menu Toggle
         document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
+            document.getElementById('nav-menu').classList.toggle('active');
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         });
 
         // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
+        const counters = document.querySelectorAll('.counter');
+        const speed = 200;
+        let hasAnimated = false;
+
+        const animateCounters = () => {
             counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                };
+                updateCount();
             });
-        }
+        };
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+        // Trigger counter animation when stats section is visible
+        const statsSection = document.querySelector('.stats');
+        const observer =
